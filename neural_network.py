@@ -35,7 +35,7 @@ class neuralNetwork:
 
         # weights correction
         self.who += self.l_rate * np.dot((output_errors * output_outputs * (1.0 - output_outputs)), np.transpose(hidden_outputs))
-        self.wih += self.l_rater * np.dot((hidden_errors * hidden_outputs * (1.0 - hidden_outputs)), np.transpose(inputs))
+        self.wih += self.l_rate * np.dot((hidden_errors * hidden_outputs * (1.0 - hidden_outputs)), np.transpose(inputs))
     # run trained neural network function
     def run(self, inputs_list):
         inputs = np.array(inputs_list, ndmin=2).T
