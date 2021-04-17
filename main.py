@@ -53,6 +53,7 @@ test_data_list = load_test_data(test_data_location)
 
 correct_number = 0
 incorrect_number = 0
+confusion_matrix = np.zeros((10, 10))
 
 for sample in test_data_list:
     values = sample.split(',')
@@ -65,6 +66,18 @@ for sample in test_data_list:
         correct_number += 1
     else:
         incorrect_number += 1
+    confusion_matrix[int(correct_label)][int(label)] += 1
 
 print('Number of correct answers: ', correct_number)
 print('Number of incorrect answers: ', incorrect_number)
+print('Accuracy: ', correct_number/(correct_number+incorrect_number))
+
+for i in range(10):
+    precision_denominator = 0
+    recall_denominator = 0
+    for j in range(10):
+        precision_denominator += confusion_matrix[i][j]
+        recall_denominator += confusion_matrix[j][i]
+    print('Statistics for ', i,' detection' )
+    print('Presision: ', confusion_matrix[i][i]/precision_denominator)
+    print('Recall: ', confusion_matrix[i][i]/recall_denominator)
