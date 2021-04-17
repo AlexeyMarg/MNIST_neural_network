@@ -47,3 +47,24 @@ for i in range(epochs):
         # start train with scaled data
         n.train(inputs, targets)
 print('End of training')
+
+# load test data
+test_data_list = load_test_data(test_data_location)
+
+correct_number = 0
+incorrect_number = 0
+
+for sample in test_data_list:
+    values = sample.split(',')
+    correct_label = int(values[0])
+    inputs = np.asfarray(values[1:]) / 255.0 * 0.99 + 0.01
+    outputs = n.run(inputs)
+    label = np.argmax(outputs)
+
+    if label == correct_label:
+        correct_number += 1
+    else:
+        incorrect_number += 1
+
+print('Number of correct answers: ', correct_number)
+print('Number of incorrect answers: ', incorrect_number)
