@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 from neural_network import neuralNetwork
 
 # dataset files location
@@ -17,7 +18,11 @@ def load_test_data(test_data_location):
     test_data_file.close()
     return test_data_list
 
-
+def show_image(data):
+    values = data.split(',')
+    image_array = np.asfarray(values[1:]).reshape(28, 28)
+    plt.imshow(image_array, cmap='Greys', interpolation='None')
+    plt.show()
 
 # number of input nodes is a number of pixels
 input_nodes = 784
@@ -32,6 +37,7 @@ n = neuralNetwork(input_nodes, hidden_nodes, output_nodes, learning_rate)
 
 # load train data
 train_data_list = load_train_data(train_data_location)
+
 # start training
 print('Start training')
 for i in range(epochs):
@@ -55,6 +61,7 @@ correct_number = 0
 incorrect_number = 0
 confusion_matrix = np.zeros((10, 10))
 
+print('Start testing')
 for sample in test_data_list:
     values = sample.split(',')
     correct_label = int(values[0])
