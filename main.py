@@ -11,6 +11,12 @@ def load_train_data(train_data_location):
     train_data_file.close()
     return train_data_list
 
+def load_test_data(test_data_location):
+    test_data_file = open(test_data_location, 'r')
+    test_data_list = test_data_file.readlines()
+    test_data_file.close()
+    return test_data_list
+
 
 
 # number of input nodes is a number of pixels
