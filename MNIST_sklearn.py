@@ -14,4 +14,8 @@ def show_some_digit(X):
     plt.axis('off')
     plt.show()
 
-show_some_digit(X)
+#show_some_digit(X)
+
+X_train, X_test, y_train, y_test = X[:60000], X[60000:], y[:60000], y[60000:]
+shuffle_index = np.random.permutation(60000)
+X_train, y_train = X[shuffle_index], y[shuffle_index]
