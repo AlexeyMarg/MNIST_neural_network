@@ -27,18 +27,6 @@ def prepare_data():
     X_train, y_train = X[shuffle_index], y[shuffle_index]
     return  X_train, X_test, y_train, y_test
 
-def plot_roc_curve(fpr, tpr, label=None):
-    plt.plot(fpr, tpr, linewidth=2, label=label)
-    plt.plot([0,1], [0,1], 'k--')
-    plt.axis([0, 1, 0, 1])
-    plt.xlabel('False positive rate')
-    plt.ylabel('True positive rate')
-
-def get_tpr_fpr(clf, X_test, y_test):
-    y_scores = cross_val_predict(clf, X_test, y_test, cv=3, method='decision_function')
-    fpr, tpr, thresholds = roc_curve(y_test, y_scores)
-    return tpr, fpr
-
 def use_SGDClassifier(X_train, X_test, y_train, y_test):
     sgd_clf = SGDClassifier()
     print('\n\nStsrt fit SGD\n\n')
@@ -89,12 +77,6 @@ def use_RandomForestClassifier(X_train, X_test, y_train, y_test):
 X_train, X_test, y_train, y_test = prepare_data()
 
 sgd_clf = use_SGDClassifier(X_train, X_test, y_train, y_test)
-sgd_tpr, sgd_fpr = get_tpr_fpr(sgd_clf, X_test, y_test)
 
-rf_clf = use_SGDClassifier(X_train, X_test, y_train, y_test)
-rf_tpr, rf_fpr = get_tpr_fpr(rf_clf, X_test, y_test)
+rf_clf = use_RandomForestClassifier(X_train, X_test, y_train, y_test)
 
-plt.plot(sgd_fpr, sgd_tpr, 'b:', label='GSD')
-plot_roc_curve(rf_fpr, rf_tpr, 'Random forrest')
-plt.legend(loc='lower right')
-plt.show()
