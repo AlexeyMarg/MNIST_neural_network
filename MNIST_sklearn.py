@@ -73,6 +73,11 @@ def use_RandomForestClassifier(X_train, X_test, y_train, y_test):
     print('f1 score: ', clf_f1_score, '\n\n')
     return rf_clf
 
+def prediction(clf, X):
+    y = clf.predict()
+    return y
+
+
 
 X_train, X_test, y_train, y_test = prepare_data()
 
